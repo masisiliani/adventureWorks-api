@@ -2,18 +2,19 @@ package main
 
 import (
 	"adventureWorks-api/infra/database"
+	"adventureWorks-api/test"
 	"fmt"
 )
 
 func main() {
-	db, err := database.Connect()
-	defer db.Close()
-
+	err := database.Connect()
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	fmt.Println(db)
+	defer database.DB.Close()
+
+	test.TGetCustomerByID()
 
 }

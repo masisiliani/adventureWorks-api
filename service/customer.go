@@ -3,11 +3,11 @@ package service
 import (
 	"adventureWorks-api/model"
 	"adventureWorks-api/repository"
-	"database/sql"
 )
 
-func GetCustomerByID(idCustomer int, db *sql.DB) (customer model.Customer, err error) {
-	customer, err = repository.GetCustomerByID(idCustomer, db)
+func GetCustomerByID(idCustomer int) (customer model.Customer, err error) {
+
+	customer, err = repository.GetCustomerByID(idCustomer)
 	customer.FillFullName()
 
 	if err != nil {

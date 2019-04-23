@@ -1,32 +1,33 @@
 package repository
 
 import (
+	"adventureWorks-api/infra/database"
 	"adventureWorks-api/model"
-	"database/sql"
 	"fmt"
 )
 
 //GetCustomerByID return a customer by ID
-func GetCustomerByID(idCustomer int, db *sql.DB) (customer model.Customer, err error) {
+func GetCustomerByID(idCustomer int) (customer model.Customer, err error) {
 
-	fmt.Println(db)
-	rows, err := db.Query(`
+	rows, err := database.DB.Query(`
 							SELECT 	 
 								[CustomerID]
-								,[Title]
-								,[FirstName]
-								,[MiddleName]
-								,[LastName]
-								,[CompanyName]
-								,[EmailAddress]
-								,[Phone]
+								,ISNULL([Title], '')		AS [Title]
+								,ISNULL([FirstName], '')	AS [FirstName]
+								,ISNULL([MiddleName], '')	AS [MiddleName]
+								,ISNULL([LastName], '')		AS [LastName]
+								,ISNULL([CompanyName], '')	AS [CompanyName]
+								,ISNULL([CompanyName], '')	AS [CompanyName]
+								,ISNULL([Phone], '')		AS [Phone]
 							FROM [SalesLT].[Customer]
 							WHERE 
-							CustomerID = ?`, idCustomer)
+							CustomerID = ?;`, idCustomer)
 
 	defer rows.Close()
 
 	if err != nil {
+		fmt.Println(err)
+
 		return customer, err
 	}
 

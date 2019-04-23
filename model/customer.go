@@ -12,6 +12,11 @@ type Customer struct {
 	Phone        string
 }
 
-func (customer Customer) FillFullName() {
-	customer.FullName = customer.FirstName + " " + customer.MiddleName + " " + customer.LastName
+func (customer *Customer) FillFullName() {
+	customer.FullName = customer.FirstName
+	if len(customer.MiddleName) > 1 {
+		customer.FullName = customer.FullName + " " + customer.MiddleName
+	}
+
+	customer.FullName = customer.FullName + " " + customer.LastName
 }
