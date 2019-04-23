@@ -6,13 +6,14 @@ import (
 )
 
 func main() {
-	err := database.Connect()
-	defer database.DataBaseSQL.Close()
+	db, err := database.Connect()
+	defer db.Close()
 
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	fmt.Println(database.DataBaseSQL)
+	fmt.Println(db)
+
 }

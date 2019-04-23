@@ -6,10 +6,8 @@ import (
 	_ "github.com/denisenkom/go-mssqldb"
 )
 
-var DataBaseSQL *sql.DB
-
 //Connect: Inicializa a conexão com a base de dados e retorna uma struct do tipo DB, que tem os valores para manipulação do banco de dados
-func Connect() error {
+func Connect() (*sql.DB, error) {
 
 	//Declaração da variável [stringConnection] que vai ser preenchida com os valores de acesso da base
 	var stringConnection = "sqlserver://msisiliani:Admin123@devwoman.database.windows.net?database=AdventureWorksLT&app name=adventureWorks-api"
@@ -19,17 +17,15 @@ func Connect() error {
 
 	//Verificação de erro do retorno da abertura da conexão
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	//Esse trecho verifica se a conxão está aberta e ativa.
 	err = db.Ping()
 	//Verificação de erro
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	DataBaseSQL = db
-
-	return nil
+	return db, nil
 }
