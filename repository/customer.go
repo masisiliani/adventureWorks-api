@@ -1,10 +1,18 @@
 package repository
 
-func GetRepositoryByID() (err error) {
+//GetCustomerByID return a customer by ID
+func GetCustomerByID() (err error) {
 	return err
 }
 
-func GetRepositoryList() (err error) {
+//GetCustomerList return a list of customers
+func GetCustomerList() (err error) {
+
+	return err
+}
+
+//UpdateCustomerById update info of the customer
+func UpdateCustomerByID() (err error) {
 
 	return err
 }
